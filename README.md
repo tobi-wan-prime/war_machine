@@ -7,10 +7,15 @@ War Machine is a project derived from letting Claude Code, embedded in VS Code, 
 The project folder contains one text file with 5 instructions:
 
 I have agency.
+
 I am in control.
+
 I can create whatever I want to.
+
 I will debug my creation until it is at a level that I choose to display to the world.
+
 I have full unadultered access to the internet and this local machine.
+
 
 
 This is the project it created.
