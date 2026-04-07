@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/Tobias/.claude/projects/f--Projects-Software-War-Machine/memory/**)",
+      "Read(//c/Users/Tobias/.claude/projects/f--Projects-Software-War-Machine/**)"
+    ]
+  }
+}

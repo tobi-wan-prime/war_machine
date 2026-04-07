@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>War Machine: Arena</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    background: #0a0a12;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Consolas, monospace;
+    padding: 30px 20px;
+}
+h1 {
+    text-align: center;
+    font-size: 2em;
+    color: #ff6633;
+    margin-bottom: 4px;
+    letter-spacing: 2px;
+}
+.subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 30px;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: #0f0f1a;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.2s;
+}
+.card:hover {
+    border-color: #ff6633;
+    background: #12122a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(255, 102, 51, 0.15);
+}
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+.card-name {
+    font-size: 1.15em;
+    font-weight: bold;
+    color: #ff6633;
+}
+.card-size {
+    font-size: 0.75em;
+    color: #555;
+}
+.card-desc {
+    color: #999;
+    font-size: 0.85em;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+.card-config {
+    font-size: 0.75em;
+    color: #555;
+    margin-bottom: 8px;
+}
+.card-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
+}
+.cs {
+    font-size: 0.75em;
+    color: #666;
+    background: #0a0a12;
+    padding: 3px 6px;
+    border-radius: 3px;
+    border: 1px solid #1a1a2e;
+}
+.cv {
+    color: #e0e0e0;
+    font-weight: bold;
+}
+.card-tags {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+.tag {
+    font-size: 0.65em;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(255, 102, 51, 0.1);
+    border: 1px solid rgba(255, 102, 51, 0.3);
+    color: #ff6633;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #333;
+    font-size: 0.75em;
+}
+.footer span { color: #ff6633; }
+.features {
+    max-width: 1100px;
+    margin: 0 auto 24px;
+    padding: 16px 20px;
+    background: #0f0f1a;
+    border: 1px solid #1a1a2e;
+    border-radius: 8px;
+}
+.features h2 {
+    color: #ff6633;
+    font-size: 1em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.feat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 8px;
+}
+.feat {
+    font-size: 0.8em;
+    padding: 6px 10px;
+    background: #0a0a12;
+    border: 1px solid #1a1a2e;
+    border-radius: 4px;
+    line-height: 1.4;
+}
+.feat b { color: #e0e0e0; }
+.feat { color: #888; }
+.section-label {
+    max-width: 1100px;
+    margin: 0 auto 10px;
+    color: #444;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+<h1>WAR MACHINE: ARENA</h1>
+<div class="subtitle">Evolutionary Simulation &mdash; 15 Scenarios &middot; 128+ Tests &middot; Built Autonomously</div>
+
+<div class="features">
+<h2>Simulation Mechanics</h2>
+<div class="feat-grid">
+    <div class="feat"><b>11-Gene Genome</b> &mdash; speed, sense, aggression, size, efficiency, reproduction, mutation rate, memory, RGB color</div>
+    <div class="feat"><b>Sexual Reproduction</b> &mdash; crossover + mutation when compatible organisms meet</div>
+    <div class="feat"><b>Species Classification</b> &mdash; genome-distance clustering, phylogenetic tree tracking</div>
+    <div class="feat"><b>Pack Hunting</b> &mdash; aggressive same-species organisms coordinate attacks on shared targets</div>
+    <div class="feat"><b>Herding</b> &mdash; non-aggressive organisms seek nearby kin for safety in numbers</div>
+    <div class="feat"><b>Kin Energy Sharing</b> &mdash; high-energy organisms donate to low-energy same-species neighbors</div>
+    <div class="feat"><b>Cross-Species Symbiosis</b> &mdash; passive organisms of different species gain mutual energy from proximity</div>
+    <div class="feat"><b>Territorial Defense</b> &mdash; moderate organisms defend claimed territory from intruders</div>
+    <div class="feat"><b>Pheromone Trails</b> &mdash; food and danger chemicals diffuse through the grid, guiding decisions</div>
+    <div class="feat"><b>Organism Memory</b> &mdash; genetically-sized memory stores food and danger locations</div>
+    <div class="feat"><b>Day/Night Cycle</b> &mdash; light level affects sense range; night-adapted organisms gain an edge</div>
+    <div class="feat"><b>Aging &amp; Death</b> &mdash; metabolic cost increases with age; tracked cause of death (starvation, old age, combat, meteor)</div>
+    <div class="feat"><b>Random Events</b> &mdash; meteor strikes, migrations, food blooms, droughts, plagues</div>
+    <div class="feat"><b>Procedural Terrain</b> &mdash; walls, toxic zones, and fertile areas from seeded generation</div>
+</div>
+</div>
+
+<div class="features" style="margin-bottom:24px">
+<h2>Viewer Features</h2>
+<div class="feat-grid">
+    <div class="feat"><b>Click-to-Follow</b> &mdash; track individual organisms across frames with trail rendering</div>
+    <div class="feat"><b>Energy Sparkline</b> &mdash; mini lifetime energy graph for tracked organisms</div>
+    <div class="feat"><b>Behavior Indicators</b> &mdash; colored dots show what each organism is doing (hunting, fleeing, grazing...)</div>
+    <div class="feat"><b>Population Heatmap</b> &mdash; toggleable density overlay (H key)</div>
+    <div class="feat"><b>Phylogenetic Tree</b> &mdash; species ancestry timeline with extinction markers</div>
+    <div class="feat"><b>Death Cause Timeline</b> &mdash; stacked chart showing how organisms die over time</div>
+    <div class="feat"><b>Behavior Distribution</b> &mdash; stacked area chart of population-wide behavioral states</div>
+    <div class="feat"><b>Territory Overlay</b> &mdash; species-colored territory claims rendered on the map</div>
+    <div class="feat"><b>Kill Crowns</b> &mdash; tiered visual markers for experienced predators (3/5/10+ kills)</div>
+    <div class="feat"><b>Speed Presets</b> &mdash; 1x/2x/4x/8x playback with keyboard shortcuts</div>
+</div>
+</div>
+
+<div class="section-label">Scenarios</div>
+<div class="grid">
+
+        <a href="arena_default.html" class="card">
+            <div class="card-header">
+                <span class="card-name">Default</span>
+                <span class="card-size">5222 KB</span>
+            </div>
+            <div class="card-desc">Standard arena — balanced parameters, events enabled</div>
+            <div class="card-config">80x40 &middot; pop 25 &middot; food 5 &middot; 500 ticks</div>
+            <div class="card-stats">
+                <div class="cs"><span class="cv">54</span> survivors</div>
+                <div class="cs"><span class="cv">588</span> born</div>
+                <div class="cs"><span class="cv">534</span> died</div>
+                <div class="cs"><span class="cv">278</span> kills</div>
+                <div class="cs"><span class="cv">28</span> max gen</div>
+                <div class="cs"><span class="cv">16</span> species</div>
+            </div>
+            <div class="card-tags"><span class="tag">Events</span></div>
+        </a>
+
+        <a href="arena_island.html" class="card">
+            <div class="card-header">
+                <span class="card-name">Island</span>
+                <span class="card-size">15516 KB</span>
+            </div>
+            <div class="card-desc">Walled arena with fertile zones — isolated populations evolve independently</div>
+            <div class="card-config">80x40 &middot; pop 30 &middot; food 4 &middot; 600 ticks</div>
+            <div class="card-stats">
+                <div class="cs"><span class="cv">164</span> survivors</div>
+                <div class="cs"><span class="cv">1920</span> born</div>
+                <div class="cs"><span class="cv">1756</span> died</div>
+                <div class="cs"><span class="cv">723</span> kills</div>
+                <div class="cs"><span class="cv">15</span> max gen</div>
+                <div class="cs"><span class="cv">25</span> species</div>
+            </div>
+            <div class="card-tags"><span class="tag">Events</span> <span class="tag">Terrain</span></div>
+        </a>
+
+        <a href="arena_gauntlet.html" class="card">
+            <div class="card-header">
+                <span class="card-name">Gauntlet</span>
+                <span class="card-size">9798 KB</span>
+            </div>
+            <div class="card-desc">Dense walls, low food, high pop — survival of the fittest</div>
+            <div class="card-config">60x30 &middot; pop 40 &middot; food 2 &middot; 400 ticks</div>
+            <div class="card-stats">
+                <div class="cs"><span class="cv">178</span> survivors</div>
+                <div class="cs"><span class="cv">1826</span> born</div>
+                <div class="cs"><span class="cv">1648</span> died</div>
+                <div class="cs"><span class="cv">744</span> kills</div>
+                <div class="cs"><span class="cv">15</span> max gen</div>
+                <div class="cs"><span class="cv">26</span> species</div>
+            </div>
+            <div class="card-tags"><span class="tag">Events</span> <span class="tag">Terrain</span></div>
+        </a>
+
+        <a href="arena_paradise.html" class="card">
+            <div class="card-header">
+                <span class="card-name">Paradise</span>
+                <span class="card-size">10522 KB</span>
+            </div>
+            <div class="card-desc">Abundant food, no events — watch evolution without pressure</div>
+            <div class="card-config">80x40 &middot; pop 15 &middot; food 10 &middot; 800 ticks</div>
+            <div class="card-stats">
+                <div class="cs"><span class="cv">54</span> survivors</div>
+                <div class="cs"><span class="cv">1337</span> born</div>
+                <div class="cs"><span class="cv">1283</span> died</div>
+                <div class="cs"><span class="cv">246</span> kills</div>
+                <div class="cs"><span class="cv">36</span> max gen</div>
+                <div class="cs"><span class="cv">11</span> species</div>
+            </div>
+            <div class="card-tags"></div>
+        </a>
+
+        <a href="arena_maze.html" class="card">
+            <div class="card-header">
+                <span class="card-name">Maze</span>
+                <span class="card-size">8937 KB</span>
+            </div>
+            <div class="card-desc">Heavy terrain with many walls — organisms must navigate tight corridors</div>
+            <div class="card-config">80x40 &middot; pop 20 &middot; food 4 &middot; 500 ticks</div>
+            <div class="card-stats">
+                <div class="cs"><span class="cv">107</span> survivors</div>
+                <div class="cs"><span class="cv">3204</span> born</div>
+                <div class="cs"><span class="cv">3097</span> died</div>
+                <div class="cs"><span class="cv">47</span> kills</div>
+                <div class="cs"><span class="cv">8</span> max gen</div>
+                <div class="cs"><span class="cv">19</span> species</div>
+            </div>
+            <div class="card-tags"><span class="tag">Events</span> <span class="tag">Terrain</span></div>
+        </a>
+
+        <a href="arena_apocalypse.html" class="card">
+            <div class="card-header">
+                <span class="card-name">Apocalypse</span>
+                <span class="card-size">19327 KB</span>
+            </div>
+            <div class="card-desc">Frequent events, scarce food, toxic terrain — can life persist?</div>
+            <div class="card-config">60x30 &middot; pop 30 &middot; food 2 &middot; 500 ticks</div>
+            <div class="card-stats">
+                <div class="cs"><span class="cv">328</span> survivors</div>
+                <div class="cs"><span class="cv">7530</span> born</div>
+                <div class="cs"><span class="cv">7202</span> died</div>
+                <div class="cs"><span class="cv">5689</span> kills</div>
+                <div class="cs"><span class="cv">40</span> max gen</div>
+                <div class="cs"><span class="cv">20</span> species</div>
+            </div>
+            <div class="card-tags"><span class="tag">Events</span> <span class="tag">Terrain</span></div>
+        </a>
+
+        <a href="arena_petri.html" class="card">
+            <div class="card-header">
+                <span class="card-name">Petri Dish</span>
+                <span class="card-size">1963 KB</span>
+            </div>
+            <div class="card-desc">Small arena, few organisms — watch individual lineages diverge</div>
+            <div class="card-config">40x20 &middot; pop 8 &middot; food 3 &middot; 400 ticks</div>
+            <div class="card-stats">
+                <div class="cs"><span class="cv">19</span> survivors</div>
+                <div class="cs"><span class="cv">129</span> born</div>
+                <div class="cs"><span class="cv">110</span> died</div>
+                <div class="cs"><span class="cv">25</span> kills</div>
+                <div class="cs"><span class="cv">9</span> max gen</div>
+                <div class="cs"><span class="cv">7</span> species</div>
+            </div>
+            <div class="card-tags"></div>
+        </a>
+
+        <a href="arena_colony.html" class="card">
+            <div class="card-header">
+                <span class="card-name">Colony</span>
+                <span class="card-size">14118 KB</span>
+            </div>
+            <div class="card-desc">Large population with terrain — watch herds form, packs hunt, colonies emerge</div>
+            <div class="card-config">100x50 &middot; pop 50 &middot; food 8 &middot; 600 ticks</div>
+            <div class="card-stats">
+                <div class="cs"><span class="cv">140</span> survivors</div>
+                <div class="cs"><span class="cv">3577</span> born</div>
+                <div class="cs"><span class="cv">3437</span> died</div>
+                <div class="cs"><span class="cv">1221</span> kills</div>
+                <div class="cs"><span class="cv">23</span> max gen</div>
+                <div class="cs"><span class="cv">38</span> species</div>
+            </div>
+            <div class="card-tags"><span class="tag">Events</span> <span class="tag">Terrain</span></div>
+        </a>
+
+        <a href="arena_predator_prey.html" class="card">
+            <div class="card-header">
+                <span class="card-name">Predator vs Prey</span>
+                <span class="card-size">7743 KB</span>
+            </div>
+            <div class="card-desc">Two rival populations — fast aggressive hunters vs large cooperative herders</div>
+            <div class="card-config">80x40 &middot; pop 40 &middot; food 6 &middot; 600 ticks</div>
+            <div class="card-stats">
+                <div class="cs"><span class="cv">62</span> survivors</div>
+                <div class="cs"><span class="cv">829</span> born</div>
+                <div class="cs"><span class="cv">767</span> died</div>
+                <div class="cs"><span class="cv">236</span> kills</div>
+                <div class="cs"><span class="cv">20</span> max gen</div>
+                <div class="cs"><span class="cv">6</span> species</div>
+            </div>
+            <div class="card-tags"><span class="tag">Events</span> <span class="tag">Presets</span></div>
+        </a>
+
+        <a href="arena_war.html" class="card">
+            <div class="card-header">
+                <span class="card-name">War</span>
+                <span class="card-size">26558 KB</span>
+            </div>
+            <div class="card-desc">Two aggressive factions in walled terrain — territorial warfare and speciation</div>
+            <div class="card-config">80x40 &middot; pop 40 &middot; food 5 &middot; 700 ticks</div>
+            <div class="card-stats">
+                <div class="cs"><span class="cv">218</span> survivors</div>
+                <div class="cs"><span class="cv">5428</span> born</div>
+                <div class="cs"><span class="cv">5210</span> died</div>
+                <div class="cs"><span class="cv">836</span> kills</div>
+                <div class="cs"><span class="cv">19</span> max gen</div>
+                <div class="cs"><span class="cv">6</span> species</div>
+            </div>
+            <div class="card-tags"><span class="tag">Events</span> <span class="tag">Terrain</span> <span class="tag">Presets</span></div>
+        </a>
+
+        <a href="arena_symbiosis.html" class="card">
+            <div class="card-header">
+                <span class="card-name">Symbiosis</span>
+                <span class="card-size">4101 KB</span>
+            </div>
+            <div class="card-desc">Three peaceful species — watch cross-species mutualism emerge</div>
+            <div class="card-config">60x30 &middot; pop 36 &middot; food 3 &middot; 600 ticks</div>
+            <div class="card-stats">
+                <div class="cs"><span class="cv">23</span> survivors</div>
+                <div class="cs"><span class="cv">289</span> born</div>
+                <div class="cs"><span class="cv">266</span> died</div>
+                <div class="cs"><span class="cv">2</span> kills</div>
+                <div class="cs"><span class="cv">12</span> max gen</div>
+                <div class="cs"><span class="cv">4</span> species</div>
+            </div>
+            <div class="card-tags"><span class="tag">Presets</span></div>
+        </a>
+
+        <a href="arena_ecosystem.html" class="card">
+            <div class="card-header">
+                <span class="card-name">Ecosystem</span>
+                <span class="card-size">51039 KB</span>
+            </div>
+            <div class="card-desc">Full ecosystem — predators, grazers, scouts, and defenders with terrain and events</div>
+            <div class="card-config">100x50 &middot; pop 60 &middot; food 7 &middot; 800 ticks</div>
+            <div class="card-stats">
+                <div class="cs"><span class="cv">496</span> survivors</div>
+                <div class="cs"><span class="cv">18663</span> born</div>
+                <div class="cs"><span class="cv">18167</span> died</div>
+                <div class="cs"><span class="cv">2924</span> kills</div>
+                <div class="cs"><span class="cv">58</span> max gen</div>
+                <div class="cs"><span class="cv">11</span> species</div>
+            </div>
+            <div class="card-tags"><span class="tag">Events</span> <span class="tag">Terrain</span> <span class="tag">Presets</span></div>
+        </a>
+
+        <a href="arena_biomes.html" class="card">
+            <div class="card-header">
+                <span class="card-name">Biomes</span>
+                <span class="card-size">13107 KB</span>
+            </div>
+            <div class="card-desc">Hot, cold, toxic, and fertile zones — organisms must adapt to survive their environment</div>
+            <div class="card-config">80x40 &middot; pop 30 &middot; food 5 &middot; 700 ticks</div>
+            <div class="card-stats">
+                <div class="cs"><span class="cv">111</span> survivors</div>
+                <div class="cs"><span class="cv">2202</span> born</div>
+                <div class="cs"><span class="cv">2091</span> died</div>
+                <div class="cs"><span class="cv">93</span> kills</div>
+                <div class="cs"><span class="cv">19</span> max gen</div>
+                <div class="cs"><span class="cv">5</span> species</div>
+            </div>
+            <div class="card-tags"><span class="tag">Terrain</span> <span class="tag">Presets</span></div>
+        </a>
+
+        <a href="arena_swarm.html" class="card">
+            <div class="card-header">
+                <span class="card-name">Swarm</span>
+                <span class="card-size">3823 KB</span>
+            </div>
+            <div class="card-desc">Massive population in tiny arena — pure chaos, rapid evolution, extreme selection pressure</div>
+            <div class="card-config">40x25 &middot; pop 80 &middot; food 6 &middot; 500 ticks</div>
+            <div class="card-stats">
+                <div class="cs"><span class="cv">27</span> survivors</div>
+                <div class="cs"><span class="cv">477</span> born</div>
+                <div class="cs"><span class="cv">450</span> died</div>
+                <div class="cs"><span class="cv">244</span> kills</div>
+                <div class="cs"><span class="cv">12</span> max gen</div>
+                <div class="cs"><span class="cv">33</span> species</div>
+            </div>
+            <div class="card-tags"></div>
+        </a>
+
+        <a href="arena_gladiator.html" class="card">
+            <div class="card-header">
+                <span class="card-name">Gladiator</span>
+                <span class="card-size">3132 KB</span>
+            </div>
+            <div class="card-desc">Small combat pit with two ultra-aggressive factions — fight to extinction</div>
+            <div class="card-config">30x20 &middot; pop 30 &middot; food 3 &middot; 400 ticks</div>
+            <div class="card-stats">
+                <div class="cs"><span class="cv">37</span> survivors</div>
+                <div class="cs"><span class="cv">3225</span> born</div>
+                <div class="cs"><span class="cv">3188</span> died</div>
+                <div class="cs"><span class="cv">3185</span> kills</div>
+                <div class="cs"><span class="cv">58</span> max gen</div>
+                <div class="cs"><span class="cv">4</span> species</div>
+            </div>
+            <div class="card-tags"><span class="tag">Terrain</span> <span class="tag">Presets</span></div>
+        </a>
+
+</div>
+<div class="footer">Built autonomously by <span>Claude</span> &middot; Digital organisms competing, evolving, and dying in a grid world</div>
+</body>
+</html>
