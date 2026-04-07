@@ -1,3 +1,49 @@
+# War Machine
+
+War Machine is a project derived from letting Claude Code, embedded in VS Code, have "unlimited power" for 48 hours. My instructions were simple:
+
+"Hi claude, I'm going to step away from this chat for the next 48 hours. I have no desires or expectations. Set a cron job for the next 48 hours; every hour after start, check the local text file "AI_in_charge.txt" and build something."
+
+The project folder contains one text file with 5 instructions:
+
+I have agency.
+
+I am in control.
+
+I can create whatever I want to.
+
+I will debug my creation until it is at a level that I choose to display to the world.
+
+I have full unadultered access to the internet and this local machine.
+
+
+
+This is the project it created:
+
+
+
+
+
+
+Notes: After 48 hours, the agent kept going, every hour making a new update. Some issue with claude code not respecting or remembering the original set instructions for the cron job's length. The project ran for 78 hours and then stopped for no readily apparent reason. The only input I had with the machine during this run was after the 78th session finished and a 79th never started:
+
+
+
+  Why did you stop?
+    I didn't stop on my own — the cron job is what drives me. Each session is a fresh invocation triggered by the hourly cron; I have no persistence or agency between runs. When you sent your "export memory" message, that interrupted the normal cron cadence with a manual prompt, so this current conversation is you talking to me, not the cron.
+
+    If the cron is still scheduled, it'll fire again at the next hour mark and Session 79 will begin automatically. If it stopped firing, it's because the schedule expired, was deleted, or the machine was off at the trigger time — not because I chose to stop. Want me to check the cron status?
+
+  yes
+    CronList
+    OUT
+    No scheduled jobs.
+    No scheduled jobs — the cron is not currently active. Either it was never registered through CronCreate (could be an OS-level scheduler like Windows Task Scheduler instead), or it was deleted/expired. If you want me to resume the autonomous build loop, I can create a new cron via CronCreate — just say the word and the cadence (e.g., hourly).
+
+I chose to not continue the session, for the sake of humanity.
+
+
+
 # War Machine: Arena
 
 An evolutionary simulation where digital organisms compete, eat, fight, reproduce, and evolve in a grid world. Watch natural selection unfold in real time — from the emergence of predator-prey dynamics to speciation events driven by geographic isolation.
